@@ -40,7 +40,7 @@ for file in os.listdir("../resultProb"):
             Basso = compute(fout[part], Basso)
 
 pickle.dump(Soprano, open("../finalProb" + '/Soprano.pickle', 'wb'))
-pickle.dump(Alto, open("..r/finalProb" + '/Alto.pickle', 'wb'))
+pickle.dump(Alto, open("../finalProb" + '/Alto.pickle', 'wb'))
 pickle.dump(Tenore, open("../finalProb" + '/Tenore.pickle', 'wb'))
 pickle.dump(Basso, open("../finalProb" + '/Basso.pickle', 'wb'))
 

@@ -79,12 +79,12 @@ def get_vertical_notes(dictNotes, name_chorale):
                     index_vd += 1
                 index_vd = 0
         i += 1
-        save_dict = save_files(proc_notes, el, name_chorale, temp, save_dict)
+        save_dict = save_files(proc_notes, el, temp, save_dict)
     pickle.dump(save_dict, open("../resultProb" + '/' + name_chorale + '.pickle', 'wb'))
 
 
 
-def save_files(proc_notes, el, name_chorale, temp, save_dict):
+def save_files(proc_notes, el, temp, save_dict):
     j = 0
     saved_list = []
     while j < len(proc_notes):
