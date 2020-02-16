@@ -1,1 +1,1 @@
-VerticalBachAnalysisProbability
+#**Vertical Bach Analysis Probability
