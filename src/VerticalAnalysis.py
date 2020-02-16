@@ -2,11 +2,14 @@ from music21 import *
 from src.CompositionAndPositionStruct import *
 import pickle
 
+#function to read the 4 voices
 def verticalAnalysis(score, name_chorale):
     i = -1
+    #list for the notes played in a voice
     support_score_voice = []
     for entry in score.recurse():
         if isinstance(entry, stream.Part):
+            #every time there is a new Part, there is a new instrument
             score_voice = []
             i = i + 1
             support_score_voice.append(score_voice)
@@ -21,12 +24,14 @@ def verticalAnalysis(score, name_chorale):
     while (j < lenMin):
         iNotes = get_notes(support_score_voice, i)
         for note in iNotes:
+            #append the note with the relative voice into the dictionary
             dictNotes.setdefault(i, []).append(note)
         i += 1
         j += 1
 
     get_vertical_notes(dictNotes, name_chorale)
 
+#funtion to check the shortest voice in the composition
 def shortest_voice(support_score_list):
     min = 100000000
     i = 0
@@ -36,6 +41,7 @@ def shortest_voice(support_score_list):
         i += 1
     return min
 
+#funtion to get the vertical notes played in the instant i
 def get_notes(support_score_voice, i):
     k = 0
     iNotes = []
@@ -124,7 +130,7 @@ def split_file(saved_list, temp, save_dict):
         save_dict[temp[elem[1][1]]].append([nomenota1, nomenota2, nomenota3, nomenota4, succ_note, elem[2], elem[3]])
     return save_dict
 
-
+#funtion to check if
 def checkIncmpP(cmpP_list, el):
 
     for el_cmpP in cmpP_list:
@@ -132,8 +138,7 @@ def checkIncmpP(cmpP_list, el):
             return False
     return True
 
-
-
+#funtion to check if a vertical chord is repeated into the composition and append the positions in witch is repeted
 def setPosition(vertical_array, element):
     positions = []
     i = 0
@@ -143,12 +148,13 @@ def setPosition(vertical_array, element):
         i += 1
     return positions
 
-
+#function to create a dictionary to indicate with a letter the voices
 def dictionary_voice():
     import string
     d = dict(enumerate(string.ascii_uppercase, 0))
     return d
 
+#check if the chorale has only 4 voices
 def check_part(chorale):
     i = 0
     for entry in chorale.recurse():
@@ -159,7 +165,7 @@ def check_part(chorale):
     return False
 
 
-
+#get all score and chorale name
 for chorale, name in zip(corpus.chorales.Iterator(), corpus.chorales.Iterator(returnType='filename')):
     if check_part(chorale):
         verticalAnalysis(chorale, (name.replace("bach/", "")).replace(".", "-"))

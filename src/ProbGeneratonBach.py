@@ -2,12 +2,13 @@ import  pickle
 import os
 
 
-def checknote(note,nota):
+def checknote(note, nota):
     i = 0
     while i < len(note) and note[i] != nota:
         i += 1
     return i
 
+#funtion to set all notes played after a composition with its prob into the chorale
 def compute(list, part):
 
     for k in list:
@@ -16,16 +17,16 @@ def compute(list, part):
             part[key] = [[k[4]], k[5], [k[6]]]
         else:
             part[key][1] += k[5]
-            index=checknote(part[key][0],k[4])
-            if index>=len(part[key][0]):
+            index = checknote(part[key][0], k[4])
+            if index >= len(part[key][0]):
                 part[key][0].append(k[4])
                 part[key][2].append(k[6])
             else:
-                part[key][2][index]+=k[6]
+                part[key][2][index] += k[6]
     return part
 
 
-Soprano =  Alto = Tenore = Basso = dict()
+Soprano = Alto = Tenore = Basso = dict()
 
 for file in os.listdir("../resultProb"):
     fout = pickle.load(open("../resultProb" + '/' + file, 'rb'))

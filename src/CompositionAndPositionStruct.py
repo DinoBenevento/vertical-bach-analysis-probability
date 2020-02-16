@@ -2,8 +2,11 @@ class CompositionPosition:
 
 
     def __init__(self):
+        #notes
         self.composition = []
+        #positions in witch the composition is repeated
         self.positions = []
+        #number of occurences
         self.reps = 0
 
     def add_composition(self, composition):
