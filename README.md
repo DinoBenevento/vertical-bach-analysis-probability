@@ -1,11 +1,12 @@
 # **Vertical Bach Analysis Probability**
-This project born on the idea to calculate the probability of all possible note repetitions after each single chord in the 4-voice Bach cholares.
+This project was born on the idea to calculate the probability of all possible note repetitions after each single chord in the 4-voice Bach chorales.
 
-Are scanned all Bach 4-voice chorales with the used of the library **music21** and for each chorale is wrote a pickle where is specified the vertical chord, the numbers of occurences of the chord, it's occurances and the report for each notes played after the chord for every voice.
+All Bach 4-voice chorales are scanned with the library **music21** and for each chorale, a .pickle file is generated. In such files there are several features: the vertical chord, the numbers of occurences of the chord, its occurances, and the relatioship beatween each note played after the chord for every voice.
 
 ## Result
-Into the folder **saveProb** there are 4 txt files where are specified for each chord into 4 voice chorales, the probability to find the indivcated note.
+The folder **saveProb** contains four .txt files, one for each voice.
+Each file contains every chord that is played, and for each chord the probability to find a certain note.
 
-Infact the files are formatted:
+The files are formatted as the following:
 
-[Chord]; [Nota]; [Probability to find the note after the chord]
+[Chord]; [Note]; [Probability to find Note after Chord]
