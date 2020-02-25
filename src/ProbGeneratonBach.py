@@ -26,7 +26,10 @@ def compute(list, part):
     return part
 
 
-Soprano = Alto = Tenore = Basso = dict()
+Soprano = dict()
+Alto = dict()
+Tenore = dict()
+Basso = dict()
 
 for file in os.listdir("../resultProb"):
     fout = pickle.load(open("../resultProb" + '/' + file, 'rb'))

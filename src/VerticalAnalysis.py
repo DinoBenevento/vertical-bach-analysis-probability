@@ -20,8 +20,8 @@ def verticalAnalysis(score, name_chorale):
     dictNotes = dict()
     i = 0
     j = 0
-    lenMin = shortest_voice(support_score_voice)
-    while (j < lenMin):
+    lenMax = longest_voice(support_score_voice)
+    while (j < lenMax):
         iNotes = get_notes(support_score_voice, i)
         for note in iNotes:
             #append the note with the relative voice into the dictionary
@@ -32,21 +32,24 @@ def verticalAnalysis(score, name_chorale):
     get_vertical_notes(dictNotes, name_chorale)
 
 #funtion to check the shortest voice in the composition
-def shortest_voice(support_score_list):
-    min = 100000000
+def longest_voice(support_score_list):
+    max = 0
     i = 0
     while i < len(support_score_list):
-        if min > len(support_score_list[i]):
-            min = len(support_score_list[i])
+        if max < len(support_score_list[i]):
+            max = len(support_score_list[i])
         i += 1
-    return min
+    return max
 
 #funtion to get the vertical notes played in the instant i
 def get_notes(support_score_voice, i):
     k = 0
     iNotes = []
     while k < len(support_score_voice):
-        iNotes.append(support_score_voice[k][i])
+        try:
+            iNotes.append(support_score_voice[k][i])
+        except IndexError:
+            iNotes.append("Void")
         k += 1
     return iNotes
 
@@ -106,19 +109,24 @@ def save_files(proc_notes, el, temp, save_dict):
 
 def split_file(saved_list, temp, save_dict):
 
+    nomenota1, nomenota2, nomenota3, nomenota4, succ_note = "Void", "Void", "Void", "Void", "Void"
+
     for elem in saved_list:
         if isinstance(elem[0][0], note.Note):
             nomenota1 = str(elem[0][0].pitch)
         if isinstance(elem[0][0], note.Rest):
             nomenota1 = 'Rest'
+
         if isinstance(elem[0][1], note.Note):
             nomenota2 = str(elem[0][1].pitch)
         if isinstance(elem[0][1], stream.note.Rest):
             nomenota2 = 'Rest'
+
         if isinstance(elem[0][2], note.Note):
             nomenota3 = str(elem[0][2].pitch)
         if isinstance(elem[0][2], note.Rest):
             nomenota3 = 'Rest'
+
         if isinstance(elem[0][3], note.Note):
             nomenota4 = str(elem[0][3].pitch)
         if isinstance(elem[0][3], note.Rest):
@@ -127,6 +135,7 @@ def split_file(saved_list, temp, save_dict):
             succ_note = str(elem[1][0].pitch)
         if isinstance(elem[1][0], note.Rest):
             succ_note = 'Rest'
+
         save_dict[temp[elem[1][1]]].append([nomenota1, nomenota2, nomenota3, nomenota4, succ_note, elem[2], elem[3]])
     return save_dict
 
